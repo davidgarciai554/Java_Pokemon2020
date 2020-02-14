@@ -5,17 +5,74 @@
  */
 package codigo;
 
+import java.sql.Statement;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author xp
  */
 public class VentanaPokedex extends javax.swing.JFrame {
 
+    BufferedImage buffer1 = null;
+    Image imagen1 = null;
+    int contador=0;
+    
+    Statement estado;
+    Connection conexion;
+ 
     /**
      * Creates new form VentanaPokedex
      */
     public VentanaPokedex() {
         initComponents();
+        try {
+            imagen1 = ImageIO.read(getClass().getResource("/imagenes/black-white.png"));
+        } catch (IOException ex) {
+        }
+        buffer1 = (BufferedImage) imagenPokemon.createImage(imagenPokemon.getWidth(), imagenPokemon.getHeight());
+
+        Graphics2D g2 = buffer1.createGraphics();
+
+        dibujaPokemon(contador);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager
+                    .getConnection("jdbc:mysql://127.0.0.1/test",
+            "root",
+            "");
+            estado = conexion.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error");
+        }
+    }
+
+    private void dibujaPokemon(int posicion) {
+        int fila = posicion / 31;
+        int columna = posicion % 31;
+
+        Graphics2D g2 = (Graphics2D) buffer1.getGraphics();
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, imagenPokemon.getWidth(), imagenPokemon.getHeight());
+
+        g2.drawImage(imagen1, 0, 0, imagenPokemon.getWidth(), imagenPokemon.getHeight(), columna * 96, fila * 96, columna * 96 + 96, fila * 96 + 96, null);
+        repaint();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paintComponents(g);
+        Graphics g2 = (Graphics2D) imagenPokemon.getGraphics();
+        g2.drawImage(buffer1,0,0, imagenPokemon.getWidth(), imagenPokemon.getHeight(), null);
     }
 
     /**
@@ -27,21 +84,79 @@ public class VentanaPokedex extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        izq = new javax.swing.JButton();
+        der = new javax.swing.JButton();
+        imagenPokemon = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        izq.setText("<");
+        izq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                izqActionPerformed(evt);
+            }
+        });
+
+        der.setText(">");
+        der.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                derActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout imagenPokemonLayout = new javax.swing.GroupLayout(imagenPokemon);
+        imagenPokemon.setLayout(imagenPokemonLayout);
+        imagenPokemonLayout.setHorizontalGroup(
+            imagenPokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        imagenPokemonLayout.setVerticalGroup(
+            imagenPokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(izq, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(der, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagenPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(imagenPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(der, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(izq, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(97, 97, 97))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void izqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqActionPerformed
+        contador--;
+        if(contador<0){
+            contador=0;
+        }
+        dibujaPokemon(contador);
+    }//GEN-LAST:event_izqActionPerformed
+
+    private void derActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derActionPerformed
+        contador++;
+        
+        dibujaPokemon(contador);
+    }//GEN-LAST:event_derActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +194,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton der;
+    private javax.swing.JPanel imagenPokemon;
+    private javax.swing.JButton izq;
     // End of variables declaration//GEN-END:variables
 }
