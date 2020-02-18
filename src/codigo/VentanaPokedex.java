@@ -32,6 +32,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
     Connection conexion;
     ResultSet resultadoConsulta;
 
+    String aux;
+
     /**
      * Creates new form VentanaPokedex
      */
@@ -51,14 +53,17 @@ public class VentanaPokedex extends javax.swing.JFrame {
             conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/test", "root", "");
             estado = conexion.createStatement();
             System.out.println("Se ha conectado bien :D");
-            
+
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             resultadoConsulta.next();
             nombrePokemon.setText(resultadoConsulta.getString(2));
-            numPokedex.setText("Nº de Pokedex: " + resultadoConsulta.getString(1));
-            altura.setText("Altura: " + resultadoConsulta.getString(3) + " m.");
-            peso.setText("Peso: " + resultadoConsulta.getString(4) + " Kg.");
-            habitat.setText("Habitat: " + resultadoConsulta.getString(6));
+            aux=resultadoConsulta.getString(2);
+            numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
+            altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
+            peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+            habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+            sonidoPokemon _sonidoPokemon = new sonidoPokemon();
+            _sonidoPokemon.start();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -117,7 +122,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 izqActionPerformed(evt);
             }
         });
-        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 60, 30));
+        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 60, 30));
 
         der.setText(">");
         der.addActionListener(new java.awt.event.ActionListener() {
@@ -125,9 +130,9 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 derActionPerformed(evt);
             }
         });
-        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 60, 30));
+        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 60, 30));
 
-        imagenPokemon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imagenPokemon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout imagenPokemonLayout = new javax.swing.GroupLayout(imagenPokemon);
         imagenPokemon.setLayout(imagenPokemonLayout);
@@ -188,10 +193,13 @@ public class VentanaPokedex extends javax.swing.JFrame {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.next()) {
                 nombrePokemon.setText(resultadoConsulta.getString(2));
-                numPokedex.setText("Nº de Pokedex: " + resultadoConsulta.getString(1));
-                altura.setText("Altura: " + resultadoConsulta.getString(3) + " m.");
-                peso.setText("Peso: " + resultadoConsulta.getString(4) + " Kg.");
-                habitat.setText("Habitat: " + resultadoConsulta.getString(6));
+                aux = resultadoConsulta.getString(2);
+                numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
+                altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
+                peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+                habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+                sonidoPokemon _sonidoPokemon = new sonidoPokemon();
+                _sonidoPokemon.start();
             } else {
                 nombrePokemon.setText("Este pokemon no figura en la pokedex");
             }
@@ -209,18 +217,27 @@ public class VentanaPokedex extends javax.swing.JFrame {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.next()) {
                 nombrePokemon.setText(resultadoConsulta.getString(2));
-                numPokedex.setText("Nº de Pokedex: " + resultadoConsulta.getString(1));
-                altura.setText("Altura: " + resultadoConsulta.getString(3) + " m.");
-                peso.setText("Peso: " + resultadoConsulta.getString(4) + " Kg.");
-                habitat.setText("Habitat: " + resultadoConsulta.getString(6));
+                aux = resultadoConsulta.getString(2);
+                numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
+                altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
+                peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+                habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+                sonidoPokemon _sonidoPokemon = new sonidoPokemon();
+                _sonidoPokemon.start();
             } else {
                 nombrePokemon.setText("Este pokemon no figura en la pokedex.¡Sal a capturarlo!");
             }
         } catch (SQLException ex) {
         }
 
-
     }//GEN-LAST:event_derActionPerformed
+    public class sonidoPokemon extends Thread {//Creamos un hilo para que  												
+
+        public void run() {                     //reproduzca el sonido a la vez
+            pokeSonido s = new pokeSonido(); //que sigue el juego
+            s.ReproducirSonido(s.getClass().getResource("/sonidos/" + aux + ".wav").getFile());
+        }
+    }
 
     /**
      * @param args the command line arguments
