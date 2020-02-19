@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -34,6 +35,9 @@ public class VentanaPokedex extends javax.swing.JFrame {
     Statement estado;
     Connection conexion;
     ResultSet resultadoConsulta;
+
+    //Declaramos el Hashmap (estructura para guardar el contenido de la base de datos)
+    HashMap<String, Pokemon> listaPokemon = new HashMap();
 
     String _nombrePokemon;
 
@@ -65,19 +69,33 @@ public class VentanaPokedex extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/test", "root", "");
             estado = conexion.createStatement();
+            resultadoConsulta = estado.executeQuery("Select * from pokemon");
             System.out.println("Se ha conectado bien :D");
+            //recorremos el array para cargarlo en el Hashmap
 
-            resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
-            resultadoConsulta.next();
-            nombrePokemon.setText(resultadoConsulta.getString(2));
-            _nombrePokemon = resultadoConsulta.getString(2);
-            numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
-            altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
-            peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
-            habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
-            descripcionPokemon.setText(resultadoConsulta.getString(16));
-            sonidoPokemon _sonidoPokemon = new sonidoPokemon();
-            _sonidoPokemon.start();
+            while (resultadoConsulta.next()) {
+                Pokemon p = new Pokemon();
+                p.nombre = resultadoConsulta.getString(2);
+                p.numPokedex = resultadoConsulta.getString(1);
+                p.altura = resultadoConsulta.getString(3);
+                p.descripcionPokemon = resultadoConsulta.getString(16);
+                p.peso = resultadoConsulta.getString(4);
+                p.habitat = resultadoConsulta.getString(6);
+
+                listaPokemon.put(resultadoConsulta.getString(1), p);
+            }
+            
+            Pokemon p = listaPokemon.get(String.valueOf(contador + 1));
+            nombrePokemon.setText(p.nombre);
+            numPokedex.setText(" Nº de Pokedex: " + p.numPokedex);
+            altura.setText(" Altura: " + p.altura);
+            peso.setText(" Peso: " + p.peso);
+            habitat.setText(" Habitat: " + p.habitat);
+            descripcionPokemon.setText(p.descripcionPokemon);
+
+            _nombrePokemon = p.nombre;
+            sonidoPokemon s = new sonidoPokemon();
+            s.start();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -208,48 +226,44 @@ public class VentanaPokedex extends javax.swing.JFrame {
             contador = 0;
         }
         dibujaPokemon(contador);
-        try {
-            resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
-            if (resultadoConsulta.next()) {
-                nombrePokemon.setText(resultadoConsulta.getString(2));
-                _nombrePokemon = resultadoConsulta.getString(2);
-                numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
-                altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
-                peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
-                habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
-                descripcionPokemon.setText(resultadoConsulta.getString(16));
-                sonidoPokemon _sonidoPokemon = new sonidoPokemon();
-                _sonidoPokemon.start();
-            } else {
-                nombrePokemon.setText("Este pokemon no figura en la pokedex");
-            }
-        } catch (SQLException ex) {
+        Pokemon p = listaPokemon.get(String.valueOf(contador + 1));
+        if (p != null) {
+            nombrePokemon.setText(p.nombre);
+            numPokedex.setText(" Nº de Pokedex: " + p.numPokedex);
+            altura.setText(" Altura: " + p.altura);
+            peso.setText(" Peso: " + p.peso);
+            habitat.setText(" Habitat: " + p.habitat);
+            descripcionPokemon.setText(p.descripcionPokemon);
+
+            _nombrePokemon = p.nombre;
+            sonidoPokemon s = new sonidoPokemon();
+            s.start();
         }
+
+
     }//GEN-LAST:event_izqActionPerformed
 
     private void derActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derActionPerformed
+
         contador++;
         if (contador >= 150) {
             contador = 150;
         }
-        dibujaPokemon(contador);
-        try {
-            resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
-            if (resultadoConsulta.next()) {
-                nombrePokemon.setText(resultadoConsulta.getString(2));
-                _nombrePokemon = resultadoConsulta.getString(2);
-                numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
-                altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
-                peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
-                habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
-                descripcionPokemon.setText(resultadoConsulta.getString(16));
-                sonidoPokemon _sonidoPokemon = new sonidoPokemon();
-                _sonidoPokemon.start();
-            } else {
-                nombrePokemon.setText("Este pokemon no figura en la pokedex.¡Sal a capturarlo!");
-            }
-        } catch (SQLException ex) {
+        Pokemon p = listaPokemon.get(String.valueOf(contador + 1));
+        if (p != null) {
+            nombrePokemon.setText(p.nombre);
+            numPokedex.setText(" Nº de Pokedex: " + p.numPokedex);
+            altura.setText(" Altura: " + p.altura);
+            peso.setText(" Peso: " + p.peso);
+            habitat.setText(" Habitat: " + p.habitat);
+            descripcionPokemon.setText(p.descripcionPokemon);
+
+            _nombrePokemon = p.nombre;
+            sonidoPokemon s = new sonidoPokemon();
+            s.start();
         }
+        dibujaPokemon(contador);
+
 
     }//GEN-LAST:event_derActionPerformed
     public class sonidoPokemon extends Thread {//Creamos un hilo para que  												
