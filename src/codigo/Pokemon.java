@@ -17,4 +17,8 @@ public class Pokemon {
     public String habitat = "";
     public String peso = "";
     public String descripcionPokemon = "";
+    public String especie = "";
+    public String tipo1 = "";
+    public String tipo2 = "";
+    public String habilidad = "";
 }
