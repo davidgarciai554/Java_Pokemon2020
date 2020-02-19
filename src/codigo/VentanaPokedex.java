@@ -86,7 +86,11 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 p.tipo1=resultadoConsulta.getString(7);
                 p.tipo2=resultadoConsulta.getString(8);
                 p.habilidad=resultadoConsulta.getString(9);
-
+                p.mov1=resultadoConsulta.getString(10);
+                p.mov2=resultadoConsulta.getString(11);
+                p.mov3=resultadoConsulta.getString(12);
+                p.mov4=resultadoConsulta.getString(13);
+                
                 listaPokemon.put(resultadoConsulta.getString(1), p);
             }
 
@@ -138,6 +142,14 @@ public class VentanaPokedex extends javax.swing.JFrame {
         tipo = new java.awt.Label();
         habilidad = new java.awt.Label();
         especie = new java.awt.Label();
+        mov1 = new java.awt.Label();
+        mov3 = new java.awt.Label();
+        mov2 = new java.awt.Label();
+        mov4 = new java.awt.Label();
+        movimientos = new java.awt.Label();
+        espacio1 = new java.awt.Label();
+        espacio2 = new java.awt.Label();
+        espacio3 = new java.awt.Label();
         descripcionPokemon = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
 
@@ -223,6 +235,47 @@ public class VentanaPokedex extends javax.swing.JFrame {
         especie.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 130, 30));
 
+        mov1.setBackground(new java.awt.Color(0, 0, 0));
+        mov1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov1.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(mov1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 130, 30));
+
+        mov3.setBackground(new java.awt.Color(0, 0, 0));
+        mov3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov3.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(mov3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 130, 30));
+
+        mov2.setBackground(new java.awt.Color(0, 0, 0));
+        mov2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov2.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(mov2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 130, 30));
+
+        mov4.setBackground(new java.awt.Color(0, 0, 0));
+        mov4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov4.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(mov4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, 130, 30));
+
+        movimientos.setBackground(new java.awt.Color(0, 0, 0));
+        movimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        movimientos.setForeground(new java.awt.Color(51, 255, 0));
+        movimientos.setText(" Movimientos:");
+        getContentPane().add(movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 130, 30));
+
+        espacio1.setBackground(new java.awt.Color(0, 0, 0));
+        espacio1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        espacio1.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(espacio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 130, 30));
+
+        espacio2.setBackground(new java.awt.Color(0, 0, 0));
+        espacio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        espacio2.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(espacio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 340, 130, 30));
+
+        espacio3.setBackground(new java.awt.Color(0, 0, 0));
+        espacio3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        espacio3.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(espacio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
+
         descripcionPokemon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descripcionPokemon.setForeground(new java.awt.Color(51, 255, 0));
         descripcionPokemon.setSelectedTextColor(new java.awt.Color(0, 0, 0));
@@ -305,13 +358,19 @@ public class VentanaPokedex extends javax.swing.JFrame {
             peso.setText(" Peso: " + p.peso+" Kg.");
             habitat.setText(" Habitat: " + p.habitat);
             descripcionPokemon.setText(p.descripcionPokemon);
-            especie.setText("Especie: "+p.especie);
+            especie.setText(" Especie: "+p.especie);
             if(p.tipo2!=""){
-                tipo.setText("Tipo: "+p.tipo1+"/"+p.tipo2);
+                tipo.setText(" Tipo: "+p.tipo1+"/"+p.tipo2);
             } else {
-                tipo.setText("Tipo: "+p.tipo1);
+                tipo.setText(" Tipo: "+p.tipo1);
             }
             habilidad.setText("Habilidad: "+p.habilidad);
+            
+            mov1.setText(" "+p.mov1);
+            mov2.setText(p.mov2);
+            mov3.setText(" "+p.mov3);
+            mov4.setText(p.mov4);
+            
             
             _nombrePokemon = p.nombre;
             sonidoPokemon s = new sonidoPokemon();
@@ -358,12 +417,20 @@ public class VentanaPokedex extends javax.swing.JFrame {
     private java.awt.Label altura;
     private javax.swing.JButton der;
     private javax.swing.JTextPane descripcionPokemon;
+    private java.awt.Label espacio1;
+    private java.awt.Label espacio2;
+    private java.awt.Label espacio3;
     private java.awt.Label especie;
     private java.awt.Label habilidad;
     private java.awt.Label habitat;
     private javax.swing.JPanel imagenPokemon;
     private javax.swing.JButton izq;
     private javax.swing.JLabel jLabel2;
+    private java.awt.Label mov1;
+    private java.awt.Label mov2;
+    private java.awt.Label mov3;
+    private java.awt.Label mov4;
+    private java.awt.Label movimientos;
     private java.awt.Label nombrePokemon;
     private java.awt.Label numPokedex;
     private java.awt.Label peso;

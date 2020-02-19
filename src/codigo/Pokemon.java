@@ -21,4 +21,10 @@ public class Pokemon {
     public String tipo1 = "";
     public String tipo2 = "";
     public String habilidad = "";
+    public String mov1 = "";
+    public String mov2 = "";
+    public String mov3 = "";
+    public String mov4 = "";
+    
+    
 }
