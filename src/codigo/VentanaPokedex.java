@@ -69,13 +69,26 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             resultadoConsulta.next();
+            resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
+            resultadoConsulta.next();
             nombrePokemon.setText(resultadoConsulta.getString(2));
             _nombrePokemon = resultadoConsulta.getString(2);
             numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
             altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
             peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+            if (resultadoConsulta.getString(8) != "") {
+                tipo.setText(" Tipo: " + resultadoConsulta.getString(7) + "/" + resultadoConsulta.getString(8));
+            } else {
+                tipo.setText(" Tipo: " + resultadoConsulta.getString(7));
+            }
             habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+            especie.setText(" Especie: " + resultadoConsulta.getString(5));
+            mov1.setText(resultadoConsulta.getString(10));
+            mov2.setText(resultadoConsulta.getString(11));
+            mov3.setText(resultadoConsulta.getString(12));
+            mov4.setText(resultadoConsulta.getString(13));
             descripcionPokemon.setText(resultadoConsulta.getString(16));
+
             sonidoPokemon _sonidoPokemon = new sonidoPokemon();
             _sonidoPokemon.start();
 
@@ -83,7 +96,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
             System.out.println(e.getMessage());
             System.out.println("Error en la conexion a la base de datos");
         }
-
+        sonidoFondo s = new sonidoFondo();
+        s.start();
     }
 
     private void dibujaPokemon(int posicion) {
@@ -122,6 +136,15 @@ public class VentanaPokedex extends javax.swing.JFrame {
         altura = new java.awt.Label();
         peso = new java.awt.Label();
         habitat = new java.awt.Label();
+        especie = new java.awt.Label();
+        habilidad = new java.awt.Label();
+        tipo = new java.awt.Label();
+        Movimientos = new java.awt.Label();
+        shiny = new javax.swing.JCheckBox();
+        mov1 = new java.awt.Label();
+        mov2 = new java.awt.Label();
+        mov3 = new java.awt.Label();
+        mov4 = new java.awt.Label();
         descripcionPokemon = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
 
@@ -162,39 +185,97 @@ public class VentanaPokedex extends javax.swing.JFrame {
         });
         getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 60, 30));
 
+        nombrePokemon.setAlignment(java.awt.Label.CENTER);
         nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
         nombrePokemon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nombrePokemon.setFont(new java.awt.Font("Elephant", 0, 12)); // NOI18N
-        nombrePokemon.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 100, 41));
+        nombrePokemon.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 130, 30));
 
+        numPokedex.setAlignment(java.awt.Label.CENTER);
         numPokedex.setBackground(new java.awt.Color(0, 0, 0));
         numPokedex.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        numPokedex.setFont(new java.awt.Font("Elephant", 0, 12)); // NOI18N
-        numPokedex.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(numPokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 110, 41));
+        numPokedex.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(numPokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 130, 30));
 
+        altura.setAlignment(java.awt.Label.CENTER);
         altura.setBackground(new java.awt.Color(0, 0, 0));
         altura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        altura.setFont(new java.awt.Font("Elephant", 0, 12)); // NOI18N
-        altura.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, 100, 41));
+        altura.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 130, 30));
 
+        peso.setAlignment(java.awt.Label.CENTER);
         peso.setBackground(new java.awt.Color(0, 0, 0));
         peso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        peso.setFont(new java.awt.Font("Elephant", 0, 12)); // NOI18N
-        peso.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 110, 41));
+        peso.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 130, 30));
 
+        habitat.setAlignment(java.awt.Label.CENTER);
         habitat.setBackground(new java.awt.Color(0, 0, 0));
         habitat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        habitat.setFont(new java.awt.Font("Elephant", 0, 12)); // NOI18N
-        habitat.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(habitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 130, 41));
+        habitat.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(habitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 130, 30));
 
-        descripcionPokemon.setForeground(new java.awt.Color(255, 255, 255));
+        especie.setAlignment(java.awt.Label.CENTER);
+        especie.setBackground(new java.awt.Color(0, 0, 0));
+        especie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        especie.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, 130, 30));
+
+        habilidad.setAlignment(java.awt.Label.CENTER);
+        habilidad.setBackground(new java.awt.Color(0, 0, 0));
+        habilidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        habilidad.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(habilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
+
+        tipo.setAlignment(java.awt.Label.CENTER);
+        tipo.setBackground(new java.awt.Color(0, 0, 0));
+        tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tipo.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 130, 30));
+
+        Movimientos.setAlignment(java.awt.Label.CENTER);
+        Movimientos.setBackground(new java.awt.Color(0, 0, 0));
+        Movimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Movimientos.setForeground(new java.awt.Color(102, 255, 0));
+        Movimientos.setName(""); // NOI18N
+        Movimientos.setText("Movimientos:");
+        getContentPane().add(Movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 260, 30));
+
+        shiny.setText("Shiny");
+        shiny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shinyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(shiny, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        mov1.setAlignment(java.awt.Label.CENTER);
+        mov1.setBackground(new java.awt.Color(0, 0, 0));
+        mov1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov1.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(mov1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 130, 30));
+
+        mov2.setAlignment(java.awt.Label.CENTER);
+        mov2.setBackground(new java.awt.Color(0, 0, 0));
+        mov2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov2.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(mov2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 130, 30));
+
+        mov3.setAlignment(java.awt.Label.CENTER);
+        mov3.setBackground(new java.awt.Color(0, 0, 0));
+        mov3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov3.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(mov3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 130, 30));
+
+        mov4.setAlignment(java.awt.Label.CENTER);
+        mov4.setBackground(new java.awt.Color(0, 0, 0));
+        mov4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mov4.setForeground(new java.awt.Color(102, 255, 0));
+        getContentPane().add(mov4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, 130, 30));
+
+        descripcionPokemon.setForeground(new java.awt.Color(51, 255, 0));
         descripcionPokemon.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(descripcionPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, 280, 70));
+        getContentPane().add(descripcionPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 260, 70));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Pokedex.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
@@ -211,13 +292,26 @@ public class VentanaPokedex extends javax.swing.JFrame {
         try {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.next()) {
+                resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
+                resultadoConsulta.next();
                 nombrePokemon.setText(resultadoConsulta.getString(2));
                 _nombrePokemon = resultadoConsulta.getString(2);
                 numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
                 altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
                 peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+                if (resultadoConsulta.getString(8) != "") {
+                    tipo.setText(" Tipo: " + resultadoConsulta.getString(7) + "/" + resultadoConsulta.getString(8));
+                } else {
+                    tipo.setText(" Tipo: " + resultadoConsulta.getString(7));
+                }
                 habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+                especie.setText(" Especie: " + resultadoConsulta.getString(5));
+                mov1.setText(resultadoConsulta.getString(10));
+                mov2.setText(resultadoConsulta.getString(11));
+                mov3.setText(resultadoConsulta.getString(12));
+                mov4.setText(resultadoConsulta.getString(13));
                 descripcionPokemon.setText(resultadoConsulta.getString(16));
+
                 sonidoPokemon _sonidoPokemon = new sonidoPokemon();
                 _sonidoPokemon.start();
             } else {
@@ -236,15 +330,28 @@ public class VentanaPokedex extends javax.swing.JFrame {
         try {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.next()) {
+                resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
+                resultadoConsulta.next();
                 nombrePokemon.setText(resultadoConsulta.getString(2));
                 _nombrePokemon = resultadoConsulta.getString(2);
                 numPokedex.setText(" Nº de Pokedex: " + resultadoConsulta.getString(1));
                 altura.setText(" Altura: " + resultadoConsulta.getString(3) + " m.");
                 peso.setText(" Peso: " + resultadoConsulta.getString(4) + " Kg.");
+                if (resultadoConsulta.getString(8) != "") {
+                    tipo.setText(" Tipo: " + resultadoConsulta.getString(7) + "/" + resultadoConsulta.getString(8));
+                } else {
+                    tipo.setText(" Tipo: " + resultadoConsulta.getString(7));
+                }
                 habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+                especie.setText(" Especie: " + resultadoConsulta.getString(5));
+                mov1.setText(resultadoConsulta.getString(10));
+                mov2.setText(resultadoConsulta.getString(11));
+                mov3.setText(resultadoConsulta.getString(12));
+                mov4.setText(resultadoConsulta.getString(13));
                 descripcionPokemon.setText(resultadoConsulta.getString(16));
-                sonidoPokemon _sonidoPokemon = new sonidoPokemon();
-                _sonidoPokemon.start();
+
+                sonidoPokemon s = new sonidoPokemon();
+                s.start();
             } else {
                 nombrePokemon.setText("Este pokemon no figura en la pokedex.¡Sal a capturarlo!");
             }
@@ -252,11 +359,35 @@ public class VentanaPokedex extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_derActionPerformed
+
+    private void shinyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shinyActionPerformed
+        if (shiny.isSelected()) {
+            try {
+                imagen1 = ImageIO.read(getClass().getResource("/imagenes/shinysPokemon.png"));
+                dibujaPokemon(contador);
+            } catch (IOException ex) {
+            }
+        } else {
+            try {
+                imagen1 = ImageIO.read(getClass().getResource("/imagenes/black-white.png"));
+                dibujaPokemon(contador);
+            } catch (IOException ex) {
+            }
+        }
+    }//GEN-LAST:event_shinyActionPerformed
     public class sonidoPokemon extends Thread {//Creamos un hilo para que  												
 
         public void run() {                     //reproduzca el sonido a la vez
             pokeSonido s = new pokeSonido(); //que sigue el juego
-            s.ReproducirSonido(s.getClass().getResource("/sonidos/" + _nombrePokemon + ".wav").getFile());
+            s.ReproducirSonido(s.getClass().getResource("/sonidos/" + _nombrePokemon + ".wav").getFile(), 3000);
+        }
+    }
+
+    public class sonidoFondo extends Thread {//Creamos un hilo para que  												
+
+        public void run() {                     //reproduzca el sonido a la vez
+            pokeSonido s = new pokeSonido(); //que sigue el juego
+            s.ReproducirSonido(s.getClass().getResource("/sonidos/musicaFondo.wav").getFile(), 100000);
         }
     }
 
@@ -296,15 +427,24 @@ public class VentanaPokedex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label Movimientos;
     private java.awt.Label altura;
     private javax.swing.JButton der;
     private javax.swing.JTextPane descripcionPokemon;
+    private java.awt.Label especie;
+    private java.awt.Label habilidad;
     private java.awt.Label habitat;
     private javax.swing.JPanel imagenPokemon;
     private javax.swing.JButton izq;
     private javax.swing.JLabel jLabel2;
+    private java.awt.Label mov1;
+    private java.awt.Label mov2;
+    private java.awt.Label mov3;
+    private java.awt.Label mov4;
     private java.awt.Label nombrePokemon;
     private java.awt.Label numPokedex;
     private java.awt.Label peso;
+    private javax.swing.JCheckBox shiny;
+    private java.awt.Label tipo;
     // End of variables declaration//GEN-END:variables
 }
