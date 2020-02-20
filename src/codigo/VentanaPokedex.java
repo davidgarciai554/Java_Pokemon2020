@@ -18,6 +18,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -58,6 +60,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
         descripcionPokemon.putClientProperty("Nimbus.Overrides.InheritDefaults", true);
         descripcionPokemon.setBackground(bgColor);
         try {
+//            imagen1 = ImageIO.read(getClass().getResource("/imagenes/shinysPokemon.png"));
             imagen1 = ImageIO.read(getClass().getResource("/imagenes/black-white.png"));
         } catch (IOException ex) {
         }
@@ -72,8 +75,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
             estado = conexion.createStatement();
             resultadoConsulta = estado.executeQuery("Select * from pokemon");
             System.out.println("Se ha conectado bien :D");
-            //recorremos el array para cargarlo en el Hashmap
 
+            //recorremos el array para cargarlo en el Hashmap
             while (resultadoConsulta.next()) {
                 Pokemon p = new Pokemon();
                 p.nombre = resultadoConsulta.getString(2);
@@ -82,15 +85,15 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 p.descripcionPokemon = resultadoConsulta.getString(16);
                 p.peso = resultadoConsulta.getString(4);
                 p.habitat = resultadoConsulta.getString(6);
-                p.especie=resultadoConsulta.getString(5);
-                p.tipo1=resultadoConsulta.getString(7);
-                p.tipo2=resultadoConsulta.getString(8);
-                p.habilidad=resultadoConsulta.getString(9);
-                p.mov1=resultadoConsulta.getString(10);
-                p.mov2=resultadoConsulta.getString(11);
-                p.mov3=resultadoConsulta.getString(12);
-                p.mov4=resultadoConsulta.getString(13);
-                
+                p.especie = resultadoConsulta.getString(5);
+                p.tipo1 = resultadoConsulta.getString(7);
+                p.tipo2 = resultadoConsulta.getString(8);
+                p.habilidad = resultadoConsulta.getString(9);
+                p.mov1 = resultadoConsulta.getString(10);
+                p.mov2 = resultadoConsulta.getString(11);
+                p.mov3 = resultadoConsulta.getString(12);
+                p.mov4 = resultadoConsulta.getString(13);
+
                 listaPokemon.put(resultadoConsulta.getString(1), p);
             }
 
@@ -134,7 +137,6 @@ public class VentanaPokedex extends javax.swing.JFrame {
         imagenPokemon = new javax.swing.JPanel();
         izq = new javax.swing.JButton();
         der = new javax.swing.JButton();
-        nombrePokemon = new java.awt.Label();
         numPokedex = new java.awt.Label();
         altura = new java.awt.Label();
         peso = new java.awt.Label();
@@ -150,6 +152,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
         espacio1 = new java.awt.Label();
         espacio2 = new java.awt.Label();
         espacio3 = new java.awt.Label();
+        shiny = new javax.swing.JCheckBox();
+        nombrePokemon = new java.awt.Label();
         descripcionPokemon = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
 
@@ -194,11 +198,6 @@ public class VentanaPokedex extends javax.swing.JFrame {
             }
         });
         getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 60, 30));
-
-        nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
-        nombrePokemon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nombrePokemon.setForeground(new java.awt.Color(51, 255, 0));
-        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 130, 30));
 
         numPokedex.setBackground(new java.awt.Color(0, 0, 0));
         numPokedex.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -276,6 +275,19 @@ public class VentanaPokedex extends javax.swing.JFrame {
         espacio3.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(espacio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
 
+        shiny.setText("Variocolor");
+        shiny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shinyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(shiny, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+
+        nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
+        nombrePokemon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nombrePokemon.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 130, 30));
+
         descripcionPokemon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descripcionPokemon.setForeground(new java.awt.Color(51, 255, 0));
         descripcionPokemon.setSelectedTextColor(new java.awt.Color(0, 0, 0));
@@ -310,6 +322,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
             contador = 150;
         }
         sacaInfo(contador);
+
         dibujaPokemon(contador);
 
 
@@ -341,6 +354,21 @@ public class VentanaPokedex extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel2KeyPressed
 
+    private void shinyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shinyActionPerformed
+        if (shiny.isSelected()) {
+            try {
+                imagen1 = ImageIO.read(getClass().getResource("/imagenes/shinysPokemon.png"));
+            } catch (IOException ex) {
+            }
+        } else {
+            try {
+                imagen1 = ImageIO.read(getClass().getResource("/imagenes/black-white.png"));
+            } catch (IOException ex) {
+            }
+        }
+
+    }//GEN-LAST:event_shinyActionPerformed
+
     public class sonidoPokemon extends Thread {//Creamos un hilo para que  												
 
         public void run() {                     //reproduzca el sonido a la vez
@@ -353,25 +381,24 @@ public class VentanaPokedex extends javax.swing.JFrame {
         Pokemon p = listaPokemon.get(String.valueOf(_contador + 1));
         if (p != null) {
             nombrePokemon.setText(p.nombre);
-            numPokedex.setText(" Nº de Pokedex: " + p.numPokedex+"º");
-            altura.setText(" Altura: " + p.altura +" m.");
-            peso.setText(" Peso: " + p.peso+" Kg.");
+            numPokedex.setText(" Nº de Pokedex: " + p.numPokedex + "º");
+            altura.setText(" Altura: " + p.altura + " m.");
+            peso.setText(" Peso: " + p.peso + " Kg.");
             habitat.setText(" Habitat: " + p.habitat);
             descripcionPokemon.setText(p.descripcionPokemon);
-            especie.setText(" Especie: "+p.especie);
-            if(p.tipo2!=""){
-                tipo.setText(" Tipo: "+p.tipo1+"/"+p.tipo2);
+            especie.setText(" Especie: " + p.especie);
+            if (p.tipo2 != "") {
+                tipo.setText(" Tipo: " + p.tipo1 + "/" + p.tipo2);
             } else {
-                tipo.setText(" Tipo: "+p.tipo1);
+                tipo.setText(" Tipo: " + p.tipo1);
             }
-            habilidad.setText("Habilidad: "+p.habilidad);
-            
-            mov1.setText(" "+p.mov1);
+            habilidad.setText("Habilidad: " + p.habilidad);
+
+            mov1.setText(" " + p.mov1);
             mov2.setText(p.mov2);
-            mov3.setText(" "+p.mov3);
+            mov3.setText(" " + p.mov3);
             mov4.setText(p.mov4);
-            
-            
+
             _nombrePokemon = p.nombre;
             sonidoPokemon s = new sonidoPokemon();
             s.start();
@@ -434,6 +461,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
     private java.awt.Label nombrePokemon;
     private java.awt.Label numPokedex;
     private java.awt.Label peso;
+    private javax.swing.JCheckBox shiny;
     private java.awt.Label tipo;
     // End of variables declaration//GEN-END:variables
 }
