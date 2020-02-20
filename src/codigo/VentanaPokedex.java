@@ -82,6 +82,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 tipo.setText(" Tipo: " + resultadoConsulta.getString(7));
             }
             habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
+            habilidad.setText(" Habilidad"+resultadoConsulta.getString(9));
             especie.setText(" Especie: " + resultadoConsulta.getString(5));
             mov1.setText(resultadoConsulta.getString(10));
             mov2.setText(resultadoConsulta.getString(11));
@@ -146,6 +147,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
         mov3 = new java.awt.Label();
         mov4 = new java.awt.Label();
         descripcionPokemon = new javax.swing.JTextPane();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,7 +156,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        imagenPokemon.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        imagenPokemon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout imagenPokemonLayout = new javax.swing.GroupLayout(imagenPokemon);
         imagenPokemon.setLayout(imagenPokemonLayout);
@@ -189,49 +191,49 @@ public class VentanaPokedex extends javax.swing.JFrame {
         nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
         nombrePokemon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nombrePokemon.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 130, 30));
+        getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 130, 30));
 
         numPokedex.setAlignment(java.awt.Label.CENTER);
         numPokedex.setBackground(new java.awt.Color(0, 0, 0));
         numPokedex.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         numPokedex.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(numPokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 130, 30));
+        getContentPane().add(numPokedex, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 130, 30));
 
         altura.setAlignment(java.awt.Label.CENTER);
         altura.setBackground(new java.awt.Color(0, 0, 0));
         altura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         altura.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 130, 30));
+        getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, 130, 30));
 
         peso.setAlignment(java.awt.Label.CENTER);
         peso.setBackground(new java.awt.Color(0, 0, 0));
         peso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         peso.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 130, 30));
+        getContentPane().add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 130, 30));
 
         habitat.setAlignment(java.awt.Label.CENTER);
         habitat.setBackground(new java.awt.Color(0, 0, 0));
         habitat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         habitat.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(habitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 130, 30));
+        getContentPane().add(habitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 260, 130, 30));
 
         especie.setAlignment(java.awt.Label.CENTER);
         especie.setBackground(new java.awt.Color(0, 0, 0));
         especie.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         especie.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, 130, 30));
+        getContentPane().add(especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 130, 30));
 
         habilidad.setAlignment(java.awt.Label.CENTER);
         habilidad.setBackground(new java.awt.Color(0, 0, 0));
         habilidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         habilidad.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(habilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
+        getContentPane().add(habilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 130, 30));
 
         tipo.setAlignment(java.awt.Label.CENTER);
         tipo.setBackground(new java.awt.Color(0, 0, 0));
         tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tipo.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 130, 30));
+        getContentPane().add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 130, 30));
 
         Movimientos.setAlignment(java.awt.Label.CENTER);
         Movimientos.setBackground(new java.awt.Color(0, 0, 0));
@@ -239,7 +241,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
         Movimientos.setForeground(new java.awt.Color(102, 255, 0));
         Movimientos.setName(""); // NOI18N
         Movimientos.setText("Movimientos:");
-        getContentPane().add(Movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 260, 30));
+        getContentPane().add(Movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 260, 30));
 
         shiny.setText("Shiny");
         shiny.addActionListener(new java.awt.event.ActionListener() {
@@ -253,29 +255,43 @@ public class VentanaPokedex extends javax.swing.JFrame {
         mov1.setBackground(new java.awt.Color(0, 0, 0));
         mov1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mov1.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(mov1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 130, 30));
+        getContentPane().add(mov1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 130, 30));
 
         mov2.setAlignment(java.awt.Label.CENTER);
         mov2.setBackground(new java.awt.Color(0, 0, 0));
         mov2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mov2.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(mov2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 370, 130, 30));
+        getContentPane().add(mov2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 130, 30));
 
         mov3.setAlignment(java.awt.Label.CENTER);
         mov3.setBackground(new java.awt.Color(0, 0, 0));
         mov3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mov3.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(mov3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 130, 30));
+        getContentPane().add(mov3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 130, 30));
 
         mov4.setAlignment(java.awt.Label.CENTER);
         mov4.setBackground(new java.awt.Color(0, 0, 0));
         mov4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mov4.setForeground(new java.awt.Color(102, 255, 0));
-        getContentPane().add(mov4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, 130, 30));
+        getContentPane().add(mov4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 130, 30));
 
+        descripcionPokemon.setBorder(null);
         descripcionPokemon.setForeground(new java.awt.Color(51, 255, 0));
         descripcionPokemon.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(descripcionPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 260, 70));
+        getContentPane().add(descripcionPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, 260, 70));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Pokedex.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
@@ -437,6 +453,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
     private javax.swing.JPanel imagenPokemon;
     private javax.swing.JButton izq;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private java.awt.Label mov1;
     private java.awt.Label mov2;
     private java.awt.Label mov3;
