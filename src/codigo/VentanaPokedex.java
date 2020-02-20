@@ -358,11 +358,13 @@ public class VentanaPokedex extends javax.swing.JFrame {
         if (shiny.isSelected()) {
             try {
                 imagen1 = ImageIO.read(getClass().getResource("/imagenes/shinysPokemon.png"));
+                dibujaPokemon(contador);
             } catch (IOException ex) {
             }
         } else {
             try {
                 imagen1 = ImageIO.read(getClass().getResource("/imagenes/black-white.png"));
+                dibujaPokemon(contador);
             } catch (IOException ex) {
             }
         }
