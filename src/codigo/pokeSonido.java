@@ -14,14 +14,14 @@ import java.net.URL;
  */
 public class pokeSonido extends Thread {
     
-    public void ReproducirSonido(String fichero) {
+    public void ReproducirSonido(String fichero,int Tiempo) {
         AudioClip sonido;
         URL url;
         try {
             url = new URL("file:" + fichero);
             sonido = java.applet.Applet.newAudioClip(url);
             sonido.play();
-            Thread.sleep(3000);
+            Thread.sleep(Tiempo);
             sonido.loop();
             sonido.stop();
         } catch (Exception e) {

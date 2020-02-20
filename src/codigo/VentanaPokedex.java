@@ -98,6 +98,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
             }
 
             sacaInfo(contador);
+            sonidoFondo s = new sonidoFondo();
+            s.start();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -144,15 +146,15 @@ public class VentanaPokedex extends javax.swing.JFrame {
         tipo = new java.awt.Label();
         habilidad = new java.awt.Label();
         especie = new java.awt.Label();
+        shiny = new javax.swing.JCheckBox();
         mov1 = new java.awt.Label();
         mov3 = new java.awt.Label();
         mov2 = new java.awt.Label();
         mov4 = new java.awt.Label();
-        movimientos = new java.awt.Label();
         espacio1 = new java.awt.Label();
-        espacio2 = new java.awt.Label();
         espacio3 = new java.awt.Label();
-        shiny = new javax.swing.JCheckBox();
+        espacio2 = new java.awt.Label();
+        movimientos = new java.awt.Label();
         nombrePokemon = new java.awt.Label();
         descripcionPokemon = new javax.swing.JTextPane();
         jLabel2 = new javax.swing.JLabel();
@@ -174,11 +176,11 @@ public class VentanaPokedex extends javax.swing.JFrame {
         imagenPokemon.setLayout(imagenPokemonLayout);
         imagenPokemonLayout.setHorizontalGroup(
             imagenPokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 346, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         imagenPokemonLayout.setVerticalGroup(
             imagenPokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         getContentPane().add(imagenPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 350, 340));
@@ -234,6 +236,14 @@ public class VentanaPokedex extends javax.swing.JFrame {
         especie.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(especie, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 130, 30));
 
+        shiny.setText("Variocolor");
+        shiny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shinyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(shiny, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+
         mov1.setBackground(new java.awt.Color(0, 0, 0));
         mov1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         mov1.setForeground(new java.awt.Color(51, 255, 0));
@@ -254,34 +264,26 @@ public class VentanaPokedex extends javax.swing.JFrame {
         mov4.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(mov4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 400, 130, 30));
 
-        movimientos.setBackground(new java.awt.Color(0, 0, 0));
-        movimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        movimientos.setForeground(new java.awt.Color(51, 255, 0));
-        movimientos.setText(" Movimientos:");
-        getContentPane().add(movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 130, 30));
-
         espacio1.setBackground(new java.awt.Color(0, 0, 0));
         espacio1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         espacio1.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(espacio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 130, 30));
-
-        espacio2.setBackground(new java.awt.Color(0, 0, 0));
-        espacio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        espacio2.setForeground(new java.awt.Color(51, 255, 0));
-        getContentPane().add(espacio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 340, 130, 30));
 
         espacio3.setBackground(new java.awt.Color(0, 0, 0));
         espacio3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         espacio3.setForeground(new java.awt.Color(51, 255, 0));
         getContentPane().add(espacio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
 
-        shiny.setText("Variocolor");
-        shiny.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                shinyActionPerformed(evt);
-            }
-        });
-        getContentPane().add(shiny, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
+        espacio2.setBackground(new java.awt.Color(0, 0, 0));
+        espacio2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        espacio2.setForeground(new java.awt.Color(51, 255, 0));
+        getContentPane().add(espacio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 260, 30));
+
+        movimientos.setBackground(new java.awt.Color(0, 0, 0));
+        movimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        movimientos.setForeground(new java.awt.Color(51, 255, 0));
+        movimientos.setText(" Movimientos:");
+        getContentPane().add(movimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 130, 30));
 
         nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
         nombrePokemon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -375,7 +377,15 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
         public void run() {                     //reproduzca el sonido a la vez
             pokeSonido s = new pokeSonido(); //que sigue el juego
-            s.ReproducirSonido(s.getClass().getResource("/sonidos/" + _nombrePokemon + ".wav").getFile());
+            s.ReproducirSonido(s.getClass().getResource("/sonidos/" + _nombrePokemon + ".wav").getFile(), 3000);
+        }
+    }
+
+    public class sonidoFondo extends Thread {//Creamos un hilo para que  												
+
+        public void run() {                     //reproduzca el sonido a la vez
+            pokeSonido s = new pokeSonido(); //que sigue el juego
+            s.ReproducirSonido(s.getClass().getResource("/sonidos/musicaFondo.wav").getFile(), 100000);
         }
     }
 
