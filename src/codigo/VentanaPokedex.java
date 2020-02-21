@@ -18,7 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
 import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
 /**
@@ -79,7 +78,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
             if (resultadoConsulta.getString(8) != "") {
                 tipo.setText(" Tipo: " + resultadoConsulta.getString(7) + "/" + resultadoConsulta.getString(8));
             } else {
-                tipo.setText(" Tipo: " + resultadoConsulta.getString(7));
+                tipo.setText(" Tipo: " + resultadoConsulta.getString(7)); 
             }
             habitat.setText(" Habitat: " + resultadoConsulta.getString(6));
             habilidad.setText(" Habilidad"+resultadoConsulta.getString(9));
